@@ -63,7 +63,7 @@ class GPTClient {
         .then(parsed_data => {
           console.log(parsed_data);
           if (parsed_data)
-            return parsed_data['choices'][0]['text'];
+            return JSON.parse(parsed_data['choices'][0]['text']);
         })
     }
   }
