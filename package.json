@@ -1,0 +1,32 @@
+{
+  "name": "gepetto-server",
+  "version": "0.0.1",
+  "description": "",
+  "engines": {
+    "node": "16.x.x"
+  },
+  "scripts": {
+    "test": "node ./test/test.js",
+    "deploy": "gcloud app deploy",
+    "start": "node ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hallelk/gepetto-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hallelk/gepetto-server/issues"
+  },
+  "homepage": "https://github.com/hallelk/gepetto-server#readme",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "helmet": "^6.0.1"
+  },
+  "devDependencies": {
+    "supertest": "^6.3.3"
+  }
+}
