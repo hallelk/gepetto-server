@@ -23,6 +23,7 @@ app.use(express.urlencoded({limit: '50mb', extended: true, parameterLimit:50000}
 //   next();
 // });
 
+app.get('/', (req, res, next) => { res.send('hallo and welcome to the gepetto server'); });
 app.use('/api/', APIController);
 
 module.exports = app;

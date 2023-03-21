@@ -8,6 +8,7 @@ const router = express.Router();
 // Security
 // router.use('/', SecurityMW.VerifyToken);
 
+router.get('/', (req, res, next) => { res.send('hallo and welcome to the api'); });
 router.post('/claims', async (req, res, next) => { 
     await BL.getClaims(req.body.text).then((v) => res.json(v), next); 
 });
