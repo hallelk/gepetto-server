@@ -8,7 +8,7 @@
   "scripts": {
     "test": "node ./test/test.js",
     "deploy": "gcloud app deploy",
-    "start": "node ./src/server.js"
+    "start": "node ./server.js"
   },
   "repository": {
     "type": "git",
