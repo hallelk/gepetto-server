@@ -3,6 +3,7 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const APIController = require('./APIController.js');
+const path = require('path');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.urlencoded({limit: '50mb', extended: true, parameterLimit:50000}
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Access-Token, x-access-token");
 //   next();
 // });
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res, _) => { res.send('hallo and welcome to the gepetto server'); });
 app.use('/api/', APIController);
