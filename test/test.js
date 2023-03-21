@@ -17,11 +17,10 @@ request(app)
             console.log(err);
             throw err; }
         else {
-            console.log(res.body);
             doTests(res.body);
         }
     });
 
-    async function doTests(token)  {
+    async function doTests(output)  {
      
     }

@@ -25,15 +25,14 @@ class GPTClient {
         Consider the following tweet: `;
       this.prompt_instructions = `
         Your tasks are to extract the claims made in the text, 
-        and generate questions which challenge these claims. 
+        and generate questions which challenge these claims.
+        Both claims and questions should be in Hebrew.
         Semantically, the questions should inquire about facts to base the claims, 
         people and institutions involved in situations described in the post, 
         demand details for vague claims, challenge assumptions.
       `;
       this.prompt_output =
-        `Questions' text should be in Hebrew.
-        List the claims and the questions associated with each claim. 
-        Format output in a JSON list, where each object has the claim's text and the questions associated with it.`
+        `Format output as a JSON Array of objects, where each object represents a claim and its associated questions.`
     }
   
     query_gpt(input_text) {
@@ -62,6 +61,7 @@ class GPTClient {
         .then((response) => response.data )
         .catch((error) => console.error(error))
         .then(parsed_data => {
+          console.log(parsed_data);
           if (parsed_data)
             return parsed_data['choices'][0]['text'];
         })
