@@ -1,6 +1,5 @@
 const app = require("./src/app");
 const config = require(`./config.js`);
-// const { sendMail } = require(`./utils`)
 
 const env = process.env.NODE_ENV || config.env;
 const port = process.env.PORT || config.PORT;
