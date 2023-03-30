@@ -4,7 +4,7 @@ const axios = require('axios');
 class GPTClient {
 
     OPENAI_URL = `https://api.openai.com/v1/completions`;
-
+    PLACEHOLDER_STRING = `@@@XXX@@@XXX`;
     constructor() {
   
       // openai API
@@ -20,25 +20,23 @@ class GPTClient {
       this.max_tokens = config.gpt.max_tokens;
   
       // prompt
-      this.prompt_intro =
+      this.prompt_template = 
         `You are an assistant for critical thinking.
-        Consider the following tweet: `;
-      this.prompt_instructions = `
+        Consider the following tweet: 
+        ${PLACEHOLDER_STRING}
         Your tasks are to extract the claims made in the text, 
         and generate questions which challenge these claims.
         Both claims and questions should be in Hebrew.
         Semantically, the questions should inquire about facts to base the claims, 
         people and institutions involved in situations described in the post, 
         demand details for vague claims, challenge assumptions.
-      `;
-      this.prompt_output =
-        `Format output as a JSON Array of objects, where each object represents a claim and its associated questions.`
+        Format output as a JSON Array of objects, where each object represents a claim and its associated questions.`
     }
   
     query_gpt(input_text) {
   
       // build prompt
-      const full_prompt = `${this.prompt_intro}${input_text}${this.prompt_instructions}${this.prompt_output}`;
+      const prompt = this.prompt_intro.replace(this.PLACEHOLDER_STRING, input_text);
       
       // console.log("Full prompt:" + full_prompt);
       // console.log(this.api_headers);
@@ -50,7 +48,7 @@ class GPTClient {
         headers: this.api_headers,
         data: {
           model: this.api_model,
-          prompt: full_prompt,
+          prompt: prompt,
           temperature: this.temperature,
           max_tokens: this.max_tokens,
           stream: false
