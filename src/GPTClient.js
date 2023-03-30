@@ -23,7 +23,7 @@ class GPTClient {
       this.prompt_template = 
         `You are an assistant for critical thinking.
         Consider the following tweet: 
-        ${PLACEHOLDER_STRING}
+        ${this.PLACEHOLDER_STRING}
         Your tasks are to extract the claims made in the text, 
         and generate questions which challenge these claims.
         Both claims and questions should be in Hebrew.
@@ -36,7 +36,7 @@ class GPTClient {
     query_gpt(input_text) {
   
       // build prompt
-      const prompt = this.prompt_intro.replace(this.PLACEHOLDER_STRING, input_text);
+      const prompt = this.prompt_template.replace(this.PLACEHOLDER_STRING, input_text);
       
       // console.log("Full prompt:" + full_prompt);
       // console.log(this.api_headers);
