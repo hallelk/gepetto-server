@@ -24,7 +24,9 @@ async function getClaims(text, targetLang = 'he') {
                     gpt_response['questions'].map(question => translate.translate_text(targetLang, question))
                 )
             })
-    return await getResponse();
+    let a = await getResponse();
+    console.log(a);
+    return a;
 }
 
 

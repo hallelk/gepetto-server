@@ -1,5 +1,6 @@
 const config = require('../config.js');
 const axios = require('axios');
+const { Exception, ErrorType } = require('./exception');
 
 class GPTClient {
 
@@ -25,13 +26,13 @@ class GPTClient {
       this.prompt_template = 
         `You are an assistant for analytical and critical thinking, helping people to detect and challenge populism.
         Consider the following tweet:
-        \n${this.PLACEHOLDER_STRING}\n
+        ${this.PLACEHOLDER_STRING}
         Your task is to extract the main claims made in the text, and generate 5 questions based on these claims. 
         The questions should demand details of plans and decisions that stem from the claims.
         Output a JSON object with two lists, one list with the claims named "claims" and one with the questions named "questions".`
     }
   
-    async query_gpt(input_text) {
+    query_gpt(input_text) {
   
       // build prompt
       const prompt = this.prompt_template.replace(this.PLACEHOLDER_STRING, input_text);
@@ -54,13 +55,16 @@ class GPTClient {
       };
   
       return axios(request)
-        .then((response) => response.data)
-        .catch((error) => console.error(error))
-        .then(parsed_data => {
-          // console.log(parsed_data);
-          if (parsed_data)
-            return JSON.parse(parsed_data['choices'][0]['text']);
-        })
+        .then(
+          (response) => response.data,
+          (error) => { console.error(error); throw new Exception(ErrorType.InternalError, "GPT access failure", true) }) // TODO : check docs (gpt & axios) for different options
+        .then(
+          (parsed_data) => {
+            // console.log(parsed_data);
+            if (parsed_data)
+              return JSON.parse(parsed_data['choices'][0]['text']);
+            },
+          (error) => { console.error(error); throw new Exception(ErrorType.InternalError, "GPT failure", true) }); // TODO : check docs (gpt & axios) for different options
     }
   }
   
