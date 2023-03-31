@@ -23,11 +23,10 @@ class GPTClient {
       this.prompt_template = 
         `You are an assistant for analytical and critical thinking, helping people to detect and challenge populism.
         Consider the following tweet:
-        ${this.PLACEHOLDER_STRING}
-        Your task is to extract the main claims made in the text, and generate 3 questions based on these claims. 
+        \n${this.PLACEHOLDER_STRING}\n
+        Your task is to extract the main claims made in the text, and generate 5 questions based on these claims. 
         The questions should demand details of plans and decisions that stem from the claims.
-        Format output in a JSON object with two lists, one list with the claims and one with the questions.
-        `
+        Output a JSON object with two lists, one list with the claims named "claims" and one with the questions named "questions".`
     }
   
     query_gpt(input_text) {
