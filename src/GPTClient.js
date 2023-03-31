@@ -31,7 +31,7 @@ class GPTClient {
         Output a JSON object with two lists, one list with the claims named "claims" and one with the questions named "questions".`
     }
   
-    query_gpt(input_text) {
+    async query_gpt(input_text) {
   
       // build prompt
       const prompt = this.prompt_template.replace(this.PLACEHOLDER_STRING, input_text);
@@ -57,7 +57,7 @@ class GPTClient {
         .then((response) => response.data)
         .catch((error) => console.error(error))
         .then(parsed_data => {
-          console.log(parsed_data);
+          // console.log(parsed_data);
           if (parsed_data)
             return JSON.parse(parsed_data['choices'][0]['text']);
         })

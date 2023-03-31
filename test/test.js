@@ -10,7 +10,7 @@ const sampleText = `הנברא הוא חומר. הבורא הוא לא חומר 
 
 request(app)
     .post('/api/claims')
-    .send({text: sampleText})
+    .send({text: sampleText, lang: 'he'})
     .expect(200)
     .end(function(err, res) {
         if (err) {
@@ -22,5 +22,5 @@ request(app)
     });
 
     async function doTests(output)  {
-     
+        console.log(`Output: ${JSON.stringify(output)}`)
     }

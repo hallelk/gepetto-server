@@ -12,6 +12,6 @@ module.exports = {
     'translate' : {
         'projectId' : 'gepetto-382307',
         'clientEmail' : 'gepetto@gepetto-382307.iam.gserviceaccount.com',
-        'privateKey' : process.env.GOOGLE_PRIVATE_KEY
+        'privateKey' : process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n')
     }
 };

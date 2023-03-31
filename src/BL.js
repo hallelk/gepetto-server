@@ -8,18 +8,23 @@ async function getClaims(text, targetLang = 'he') {
     let translate = new translateClient()
 
     // query GPT
-    let gpt_response = gpt.query_gpt(text);
+    let gpt_response = await gpt.query_gpt(text);
+
+    // console.log(`GPT Response: ${JSON.stringify(gpt_response)}`)
 
     // generate response
-    return {
-        'en': {
-            gpt_response
-        },
-        [targetLang]: {
-            'claims': gpt_response['claims'].map(claim => translate.translate_text(targetLang, claim)),
-            'questions': gpt_response['questions'].map(question => translate.translate_text(targetLang, question))
-        }
-    }
+    let getResponse = async () => ({
+            'en': gpt_response,
+            [targetLang]: {
+                'claims': await Promise.all(
+                    gpt_response['claims'].map(claim => translate.translate_text(targetLang, claim))
+                )
+            },
+                'questions': await Promise.all(
+                    gpt_response['questions'].map(question => translate.translate_text(targetLang, question))
+                )
+            })
+    return await getResponse();
 }
 
 

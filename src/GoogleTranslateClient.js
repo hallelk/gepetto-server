@@ -6,7 +6,7 @@ class GoogleTranslateClient {
 
     constructor() {
 
-        console.log(config.translate.privateKey)
+        // console.log(`PrivateKey: ${config.translate.privateKey}`)
 
         // Instantiate a client
         this.translate_client = new Translate({
@@ -18,19 +18,12 @@ class GoogleTranslateClient {
         });
     }
 
-    translate_text(targetLang, inputText) {
+    async translate_text(targetLang, inputText) {
 
         // Translates the text into the target language
-        this.translate_client.translate(inputText, targetLang)
-            .then(results => {
-                const translation = results[0];
-                console.log(`Text: ${inputText}`);
-                console.log(`Translation: ${translation}`);
-                return results
-            })
-            .catch(err => {
-                console.error('ERROR:', err);
-            });
+        const res = await this.translate_client.translate(inputText, targetLang);
+        return res[0]
+
     }
 }
 
