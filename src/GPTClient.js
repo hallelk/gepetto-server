@@ -5,11 +5,13 @@ class GPTClient {
 
     OPENAI_URL = `https://api.openai.com/v1/completions`;
     PLACEHOLDER_STRING = `@@@XXX@@@XXX`;
+
     constructor() {
   
-      // openai API
+      // set model
       this.api_model = config.gpt.model;
-      
+
+      // prepare request headers
       this.api_headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${config.gpt.token}`,
@@ -52,7 +54,7 @@ class GPTClient {
       };
   
       return axios(request)
-        .then((response) => response.data )
+        .then((response) => response.data)
         .catch((error) => console.error(error))
         .then(parsed_data => {
           console.log(parsed_data);
