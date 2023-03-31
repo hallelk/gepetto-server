@@ -18,11 +18,10 @@ async function getClaims(text, targetLang = 'he') {
             [targetLang]: {
                 'claims': await Promise.all(
                     gpt_response['claims'].map(claim => translate.translate_text(targetLang, claim))
-                )
-            },
+                ),
                 'questions': await Promise.all(
                     gpt_response['questions'].map(question => translate.translate_text(targetLang, question))
-                )
+                )}
             })
     return await getResponse();
 }
