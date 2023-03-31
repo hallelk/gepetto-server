@@ -16,7 +16,7 @@ router.post('/claims', async (req, res, next) => {
                 res.status(e.errorType);
                 res.send(
                     {
-                        message: e.message,
+                        message: e.errorText,
                         isFatal: e.isFatal,
                     }
                 );
